@@ -1,4 +1,5 @@
 from __future__ import annotations
+from classes.encryption import Encryption
 
 
 class Letter:
@@ -6,7 +7,7 @@ class Letter:
         self.recipient: "Person" = recipient
         self.message: str = message
         self._has_been_read: bool = False
-        self.encrypted_message = self.encrypt()
+        self.encrypted_message = Encryption(self.message)
 
     def __repr__(self):
         return repr(f"{self.recipient}'s letter")
@@ -14,7 +15,6 @@ class Letter:
     def see_read_status(self) -> bool:
         return self._has_been_read
 
-    @property
     def change_read_status(self) -> None:
         self._has_been_read = True
 
@@ -26,5 +26,5 @@ class Letter:
 
     def reader_validation(self, reader_name: str) -> str:
         if reader_name == self.recipient.name:
-            return self.decrypt()
-        return self.encrypted_message
+            return self.encrypted_message.decrypt()
+        return self.encrypted_message.encrypted_text
