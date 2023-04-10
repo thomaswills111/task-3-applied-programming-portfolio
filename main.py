@@ -13,9 +13,9 @@ post_office = PostOffice()
 def alices_day():
     while True:
         alices_letter = alice.write(bob, "Dear Bob... \n")
-        alice.deliver(post_office, alices_letter)
-        alice.check_letter_box()
+        alice.deliver_to_po(post_office, alices_letter)
         time.sleep(3)
+        alice.check_letter_box()
 
 
 def bobs_day():
@@ -23,14 +23,14 @@ def bobs_day():
         bob.check_letter_box()
         time.sleep(3)
         bobs_letter = bob.write(alice, "Dear Alice... \n")
-        bob.deliver(post_office, bobs_letter)
+        bob.deliver_to_po(post_office, bobs_letter)
 
 
 def charlies_day():
     while True:
         charlie.collect_mail(post_office)
         charlie.read(charlie.stored_letters[-1])
-        charlie.deliver_mail()
+        charlie.deliver_to_lb()
         time.sleep(3)
 
 

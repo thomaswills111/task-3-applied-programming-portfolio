@@ -8,12 +8,15 @@ class MailMan(Person):
         super().__init__(name)
         self.stored_letters: list["Letter"] = list()
 
+    def __repr__(self) -> str:
+        return f"{self.name}: Mail Man"
+
     def collect_mail(self, post_office: PostOffice) -> None:
         for letter in post_office.stored_letters:
             self.stored_letters.append(letter)
             post_office.stored_letters.remove(letter)
 
-    def deliver_mail(self) -> None:
+    def deliver_to_lb(self) -> None:
         for letter in self.stored_letters:
             letter.recipient.letter_box.stored_letters.append(letter)
             letter.recipient.letter_box.letter_flag_raised = True

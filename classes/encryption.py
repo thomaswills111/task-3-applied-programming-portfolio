@@ -4,10 +4,13 @@ import random
 
 class Encryption:
     def __init__(self, text) -> None:
-        self.shift_key = random.randint(1, 20)
-        self.encrypted_text: str = self.encrypt(text, self.shift_key)
+        self._shift_key: int = random.randint(1, 20)
+        self._encrypted_text: str = self.encrypt(text, self._shift_key)
 
-    def encrypt(self, text, shift_key) -> str:
+    def __repr__(self) -> str:
+        return f"Encrypted text: {self._encrypted_text}"
+
+    def encrypt(self, text: str, shift_key: int) -> str:
         encrypted_text = ""
         s = shift_key
         for char in text:
@@ -22,8 +25,8 @@ class Encryption:
         return encrypted_text
 
     def decrypt(self) -> str:
-        encrypted_text = self.encrypted_text
-        s = self.shift_key
+        encrypted_text = self._encrypted_text
+        s = self._shift_key
         decrypted_text = ""
         for char in encrypted_text:
             if char.isalpha():

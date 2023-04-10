@@ -7,3 +7,8 @@ class LetterBox:
         self.owner: "Person" = owner
         self.stored_letters: list["Letter"] = list()
         self.letter_flag_raised: bool = False
+
+    def __repr__(self) -> str:
+        return f"{self.owner}'s letterbox"
+
+
